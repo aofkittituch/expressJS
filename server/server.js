@@ -2,6 +2,14 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const { readdirSync } = require("fs");
+const morgan = require("morgan");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
+app.use(morgan("dev"));
+app.use(cors());
+app.use(bodyParser.json({limit: '10mb'}));
+
 // const productRouter = require("./Routes/product");
 // const authRouter = require("./Routes/auth");
 
