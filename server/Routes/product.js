@@ -1,28 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const { read, list, create, update, deleteData } = require("../controllers/productController");
 
-router.get("/product", async (req, res) => {
-  await res.send("Hello World!");
-});
-
-router.get("/product/:id", async (req, res) => {
-    await res.send("Hello 1 Product!")
-});
-
-router.post("/product", async (req, res) => {
-  await res.send("Hello post");
-});
-
-router.put("/product/:id", async (req, res) => {
-  await res.send("Hello put");
-});
-
-router.delete("/product/:id", async (req, res) => {
-  await res.json({
-    name: "kittituch",
-    age: 20,
-    id: 1,
-  });
-});
+router.get("/product", list);
+router.get("/product/:id", read);
+router.post("/product", create);
+router.put("/product/:id", update);
+router.delete("/product/:id", deleteData);
 
 module.exports = router;
