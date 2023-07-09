@@ -44,7 +44,7 @@ exports.login = async (req, res) => {
         },
       };
       // 3.gen token
-      jwt.sign(payload, "jwt-token", { expiresIn: 20 }, (err, token) => {
+      jwt.sign(payload, "jwt-token", { expiresIn: "1days" }, (err, token) => {
         if (err) throw err;
         res.json({ token, payload });
       });
