@@ -9,7 +9,9 @@ exports.register = async (req, res) => {
 
     let user = await userModels.findOne({ username });
     if (user) {
-      return res.status(400).send("User already exists");
+      return res
+        .status(400)
+        .send({ "status": false, "message": "User already exists" });
     }
     // 2.encrypt password
     const salt = await bcrypt.genSalt(10);
@@ -20,10 +22,16 @@ exports.register = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
     // 3. save
     await user.save();
-    res.status(201).send("User created");
+    res
+      .status(201)
+      .send({
+        "status": true,
+        "message": "User saved successfully",
+        "data": user,
+      });
   } catch (err) {
     console.log(err);
-    res.status(500).send("Server error: " + err.message);
+    res.status(500).send({ "status": false, "message": err.message });
   }
 };
 
@@ -35,7 +43,9 @@ exports.login = async (req, res) => {
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(400).send("Invalid password");
+        return res
+          .status(400)
+          .send({ "status": false, "message": "Invalid password" });
       }
       // 2.payload
       let payload = {
@@ -46,13 +56,22 @@ exports.login = async (req, res) => {
       // 3.gen token
       jwt.sign(payload, "jwt-token", { expiresIn: "1days" }, (err, token) => {
         if (err) throw err;
-        res.json({ token, payload });
+        res.json({
+          token,
+          payload,
+          "status": true,
+          "message": "Login successfully",
+        });
       });
     } else {
-      return res.status(400).send("Invalid username");
+      return res
+        .status(400)
+        .send({ "status": false, "message": "Invalid username" });
     }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Server error: " + err.message);
+    res
+      .status(500)
+      .send({ "status": false, "message": "Server error: " + err.message });
   }
 };

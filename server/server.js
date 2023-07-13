@@ -13,6 +13,7 @@ connectDB();
 app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.json({limit: '10mb'}));
+app.use("/uploads", express.static("uploads"));
 
 // const productRouter = require("./Routes/product");
 // const authRouter = require("./Routes/auth");

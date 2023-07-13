@@ -11,8 +11,8 @@ const {
 const { auth } = require("../Middleware/authMiddleware");
 const { upload } = require("../Middleware/uploadMiddleware");
 
-router.get("/product", auth, list);
-router.get("/product/:id", auth, read);
+router.get("/product", list);
+router.get("/product/:id", read);
 router.post("/product", auth, upload, create);
 router.put("/product/:id", auth, update);
 router.delete("/product/:id", auth, deleteData);
