@@ -101,6 +101,11 @@ const CheckPassword = async () => {
     console.log(e.message);
   }
 };
+onMounted(() => {
+  if (localStorage.getItem("token")) {
+    router.push("/admin/list");
+  }
+});
 </script>
 
 <style></style>

@@ -18,9 +18,15 @@
           <td>{{ items.detail }}</td>
           <td>{{ items.price }}</td>
           <td v-if="items.file">
-            <img :src="filePath + items.file" class="img-fluid" width="50"/>
+            <img :src="filePath + items.file" class="img-fluid" width="50" />
           </td>
-          <td v-else><img src="https://www.tairos.tw/images/default.jpg" class="img-fluid" width="50"/></td>
+          <td v-else>
+            <img
+              src="https://www.tairos.tw/images/default.jpg"
+              class="img-fluid"
+              width="50"
+            />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -41,6 +47,9 @@ export default {
   },
   async created() {
     try {
+      if (!localStorage.getItem("token")) {
+        router.push("/admin/login");
+      }
       const response = await axios.get("http://localhost:3000/api/product", {
         headers: {
           "authtoken": `${localStorage.getItem("token")}`,
@@ -50,7 +59,7 @@ export default {
       console.log(this.products);
     } catch (err) {
       console.log(err.message);
-      router.push("/login");
+      router.push("/admin/login");
     }
   },
 };

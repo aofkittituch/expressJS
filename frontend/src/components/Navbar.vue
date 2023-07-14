@@ -29,7 +29,14 @@
         </ul>
         <ul class="navbar-nav" v-if="token">
           <li class="nav-item">
-            <a class="nav-link"><b>ยินดีต้อนรับคุณ, {{ username }}</b></a>
+            <a class="nav-link"
+              ><b>ยินดีต้อนรับคุณ, {{ username }}</b></a
+            >
+          </li>
+          <li class="nav-item mb-2 mr-2">
+            <router-link to="/admin/list"
+              ><button class="btn btn-primary">Products</button></router-link
+            >
           </li>
           <li class="nav-item mb-2 mr-2">
             <button class="btn btn-danger" @click="logout">Logout</button>
@@ -64,12 +71,13 @@ export default {
     };
   },
   methods: {
-    logout() {
+    async logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       this.token = "";
       this.username = "";
-      router.push("/admin/login");
+      await router.push("/admin/login");
+      await router.go(0);
     },
   },
 };
