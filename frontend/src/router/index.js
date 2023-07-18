@@ -38,6 +38,11 @@ const router = createRouter({
       component: () => import("@/views/DetailView.vue"),
     },
     {
+      path: "/admin/product/:id",
+      name: "edit",
+      component: () => import("@/views/ProductEditView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "404Page",
       component: () => import("@/components/404Page.vue"),

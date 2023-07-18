@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-5">
-    <div class="text-center mt-5"><h1>Register</h1></div>
+  <div class="container">
+    <div class="text-center"><h1>Register</h1></div>
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Username</label>
